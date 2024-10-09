@@ -2,7 +2,7 @@
 using NorthWind.Entities.Interfaces;
 using NorthWind.Writers;
 
-IUserActionWriter Writer = new ConsoleWriter();
+IUserActionWriter Writer = new DebugWriter();
 
 Applogger Logger = new Applogger(Writer);
 Logger.WriteLog("Application Started.");
