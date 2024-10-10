@@ -4,22 +4,19 @@ using NorthWind.ConsoleApp.Services;
 using NorthWind.Entities.Interfaces;
 using NorthWind.Writers;
 
-var Builder =  Host.CreateApplicationBuilder();
+HostApplicationBuilder Builder =  Host.CreateApplicationBuilder();
 Builder.Services.AddSingleton<IUserActionWriter, DebugWriter>();
 Builder.Services.AddSingleton<Applogger>();
 Builder.Services.AddSingleton<ProductService>();
-using var AppHost = Builder.Build();
+using IHost AppHost = Builder.Build();
 
 
 
-
-IUserActionWriter Writer = new ConsoleWriter();
-
-Applogger Logger = new Applogger(Writer);
+Applogger Logger = AppHost.Services.GetRequiredService<Applogger>();
 Logger.WriteLog("Application Started.");
 
 
-ProductService service = new ProductService(Writer);
+ProductService service = AppHost.Services.GetRequiredService<ProductService>();
 service.Add("Demo", "Azucar refinada");
 
 /*
@@ -29,3 +26,6 @@ service.Add("Demo", "Azucar refinada");
  * de alto nivel son independientes de los detalles de implementacion
  * 
  * */
+
+
+
