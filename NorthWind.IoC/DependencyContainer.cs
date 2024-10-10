@@ -14,8 +14,7 @@ public static class DependencyContainer
     public static IServiceCollection AddNorthWindServices(
         this IServiceCollection services)
     {
-        services.AddConsoleWriter();
-        services.AddServices();
+        object value1;
         return services;
     }
 }
